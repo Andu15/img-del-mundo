@@ -11,5 +11,27 @@
 
 body {
   width: 80vw;
-  margin: auto;
+  @apply m-auto font-inter
+}
+
+.btn-large {
+  transition: 1s;
+  @apply
+  rounded-lg 
+  bg-primary-fluorescent-green
+  text-neutral-greenish-lead 
+  font-semibold
+  py-4
+  text-lg
+  text-2xl
+  sm:text-4xl
+  sm:py-6
+  md:text-5xl
+}
+
+.btn-large:hover {
+  @apply
+  bg-secondary-pasty-green
+  text-neutral-soft-white
+  scale-95
 }
