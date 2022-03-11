@@ -4,3 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+#nav {
+  display: none;
+}
+
+body {
+  width: 80vw;
+  margin: auto;
+}
