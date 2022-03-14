@@ -78,6 +78,5 @@
     md:mx-auto
     lg:mx-auto
     xl:md:w-3/4
-    /* 2xl: */
   }
 </style>
