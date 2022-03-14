@@ -38,7 +38,8 @@
   export default {
     name: "Positions",
     components: {
-      Icon
+      Icon,
+      SellerScore
     }
   }
 </script>
