@@ -9,10 +9,10 @@
     </section>
     <section class="action-container">
       <span class="search-word">encanto</span>
-      <button class="action-btn-container">
+      <router-link to="positions" class="action-btn-container">
         <Icon icon="bxs:medal" color="#98f5e1" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
-      </button>
+      </router-link>
     </section>
     <main class="img-list">
       <ImageContainer/>
