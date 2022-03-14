@@ -10,7 +10,7 @@
       <section class="info-summary-container">
         <div class="ref-tag">
           <p>Nombre</p>
-          <p>Tiene/Falta</p>
+          <p>Tiene / Falta</p>
         </div>
         <div>
           <SellerScore/>
@@ -18,12 +18,10 @@
         </div>
         <div class="invoice-btn-container">
           <router-link to="invoice" class="invoice-btn">
-            <Icon icon="fa-solid:file-invoice-dollar" height="30" />
+            <Icon class="invoice-icon" icon="fa-solid:file-invoice-dollar" height="30" />
             <p>Reclamar Factura</p>
           </router-link>
-          <div>
-            <!-- otro componente -->
-          </div>
+          <StartButton/>
         </div>
       </section>
     </section>
@@ -34,12 +32,14 @@
   import { Icon } from "@iconify/vue";
 
   import SellerScore from "../components/SellerScore.vue";
+  import StartButton from "../components/StartButton.vue";
 
   export default {
     name: "Positions",
     components: {
       Icon,
-      SellerScore
+      SellerScore,
+      StartButton
     }
   }
 </script>
@@ -57,19 +57,30 @@
     text-secondary-pasty-green
     text-left
     text-xl
-    font-medium	
+    font-medium
+    sm:text-2xl
+    lg:text-3xl
   }
 
   .summary-container {
     @apply
     flex
     flex-col
-    lg:flex-row
-    lg:flex-row
+    sm:my-8
+    /* lg:flex-row */
+    /* lg:justify-evenly */
+    /* lg:content-center */
+    lg:grid
+    lg:grid-cols-2
+    lg:mx-auto
   }
 
   .intro-summary-container {
     margin: auto;
+    @apply
+    w-4/5	
+    xl:w-8/12
+    2xl:w-7/12
   }
 
   .description-text {
@@ -78,8 +89,8 @@
     font-normal
     text-lg
     my-2
-    lg:text-xl
-    lg:my-4
+    sm:text-xl
+    lg:text-2xl
   }
 
   .winner-seller {
@@ -88,29 +99,43 @@
     font-normal
     text-lg
     my-2
+    sm:text-xl
+    lg:text-2xl
   }
 
   .info-summary-container {
     @apply
     flex
     flex-col
+    sm:w-4/5
+    sm:mx-auto
+    lg:w-11/12
+    lg:my-auto
+    xl:w-9/12
+    2xl:w-8/12
   }
 
   .ref-tag{
     @apply
-    grid
-    grid-cols-2
+    flex
+    flex-row
+    justify-between
     font-normal
     text-primary-medium-green
-    text-base
+    text-lg
     mt-4
     mb-2
+    mx-8
+    sm:text-xl
   }
 
   .invoice-btn-container {
     @apply
     flex
-    flex-col
+    flex-row
+    justify-between
+    content-center
+    relative
   }
 
   .invoice-btn {
@@ -120,8 +145,29 @@
     flex
     flex-row
     text-neutral-greenish-lead
-    justify-evenly
+    justify-center
     py-2
     text-lg
+    col-span-2
+    px-1
+    w-9/12
+    my-auto
+    sm:justify-evenly
+    sm:text-xl
+    sm:py-4
+    sm:px-6
+  }
+
+  .invoice-btn:hover {
+    @apply
+    bg-neutral-greenish-lead
+    text-primary-fluorescent-green
+    duration-500
+  }
+
+  .invoice-icon {
+    @apply
+    my-auto
+    mr-1
   }
 </style>
