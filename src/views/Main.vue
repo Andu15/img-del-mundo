@@ -3,12 +3,12 @@
     <section class="search-container">
       <label class="text-label" for="site-search">Buscar:</label>
       <div class="input-search-container">
-        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Escribe aquí..."/>
-        <Icon icon="fa-solid:search" color="#98f5e1" height="30" />
+        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Escribe aquí..." v-model="query"/>
+        <Icon icon="fa-solid:search" color="#98f5e1" height="30" @click="getWordTag"/>
       </div>
     </section>
     <section class="action-container">
-      <span class="search-word">encanto</span>
+      <span class="search-word" v-if="tagWord.length">{{ tagWord }}</span>
       <router-link to="positions" class="action-btn-container">
         <Icon icon="bxs:medal" color="#98f5e1" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
@@ -28,12 +28,25 @@
   import { Icon } from "@iconify/vue";
 
   import ImageContainer from "../components/ImageContainer.vue";
+  import { imageSearch } from "../services/pexels";
 
   export default {
     name: "Main",
     components: {
       Icon,
       ImageContainer
+    },
+    data() {
+      return {
+        query: '',
+        tagWord: ''
+      }
+    },
+    methods: {
+      getWordTag(){
+        this.tagWord = this.query;
+        // imageSearch("hola", 9)
+      }
     }
   }
 </script>

@@ -21,6 +21,11 @@ const routes = [
     path: '/invoice',
     name: 'Invoice',
     component: () => import(/* webpackChunkName: "invoice" */ '../views/Invoice.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Error404',
+    component: () => import(/* webpackChunkName: "/:pathMatch(.*)*" */ '../views/Error404.vue')
   }
 ]
 
@@ -30,10 +35,5 @@ const router = createRouter({
   history,
   routes,
 });
-
-// const router = createRouter({
-//   history: createWebHistory(process.env.BASE_URL),
-//   routes
-// })
 
 export default router

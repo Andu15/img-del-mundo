@@ -1,10 +1,10 @@
 <template>
-  <div id="nav">
+  <!-- <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/main">Main</router-link> |
     <router-link to="/positions">Positions</router-link> |
     <router-link to="/invoice">Invoice</router-link> 
-  </div>
+  </div> -->
   <router-view/>
 </template>
 

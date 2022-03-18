@@ -11,7 +11,9 @@ module.exports = {
         "aqua-green": "#CBF3F0"
       },
       secondary: {
-        "pasty-green": "#2EC4B6"
+        "pasty-green": "#2EC4B6",
+        "navy-blue" : "#293b49",
+        "pinkish" : "#fdabaf"
       },
       neutral: {
         "greenish-lead": "#B3C7C5",

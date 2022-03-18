@@ -1,6 +1,7 @@
 {
   "name": "img-del-mundo",
   "private": true,
+  "type": "module",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -8,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "base-64": "^1.0.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",
     "vuex": "^4.0.2"
