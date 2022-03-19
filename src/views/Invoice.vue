@@ -3,7 +3,7 @@
     <section class="statement-container">
       <img src="../assets/imagenes_del_mundo_logo.png" alt="logo"/>
       <div class="titles-invoice">
-        <h2 class="title">Factura Alegra</h2>
+        <h2 class="title">Factura</h2>
         <p class="subtitle">Imagenes del Mundo</p>
       </div>
     </section>

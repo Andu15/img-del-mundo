@@ -1,10 +1,9 @@
 <template>
   <div class="img-container">
-    <img class="img-item" src="../assets/image 2.png" alt="prueba"/>
+    <img class="img-item" :src="image.src.landscape" alt="prueba"/>
     <p class="likes"><span>15</span> likes</p>
     <p class="author">vendedor1</p>
     <button class="likes-action-btn">
-      <!-- <p class="text-btn">Me gusta</p> -->
       <Icon class="heart-icon" icon="el:heart-alt" height="30" />
     </button>
   </div>
@@ -19,9 +18,9 @@ export default {
   components: {
 		Icon,
 	},
-  props: {
-    // msg: String
-  }
+  props: [
+    'image'
+  ]
 }
 </script>
 

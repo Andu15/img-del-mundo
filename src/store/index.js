@@ -1,23 +1,15 @@
-import { createStore } from "vuex"
+import { createStore } from "vuex";
+
+import state from "./state";
+import * as getters from "./getters";
+import * as mutations from "./mutations";
+import * as actions from "./actions";
+import * as modules from "./modules";
 
 export default createStore({
-  state: {
-    tagWord: ""
-  },
-  mutations: {
-    setQuery(state, tagWordAccion){
-			state.tagWord = tagWordAccion
-		}
-  },
-  actions: {
-    getAllSellers: async function () {
-      const data = await fetch('https://api.alegra.com/api/v1/sellers/');
-      const sellers = await data.json();
-      console.log(sellers)
-    }
-
-
-  },
-  modules: {
-  }
+  state,
+  getters,
+  mutations,
+  actions,
+  modules
 })

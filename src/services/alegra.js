@@ -1,25 +1,27 @@
-import base64 from 'base-64';
+import { Base64 } from 'js-base64';
 
-const USERNAME = import.meta.env.VITE_ALEGRA_USERNAME;
-const PASSWORD = import.meta.env.VITE_ALEGRA_PASSWORD;
+const username = import.meta.env.VITE_ALEGRA_USERNAME;
+const password = import.meta.env.VITE_ALEGRA_PASSWORD;
 
-const token = base64.encode(`${USERNAME}:${PASSWORD}`);
+const token = Base64.encode(`${username}:${password}`);
 
-const options = {
-  headers: {
+// const options = {
+const headers = {
     "Accept": 'application/json',
     "Content-type": "application/json",
     "Authorization": `Basic ${token}`
   }
-}
+// }
 
 const baseUrl = "https://api.alegra.com/api/v1/";
 
-
-
 export const getSellers = async () => {
   const url = `${baseUrl}sellers/`;
-  const response = await fetch(url, {...options, method: "GET"});
+  // const response = await fetch(url, {...options, method: "GET"});
+  const response = await fetch(url, {
+    method: 'GET',
+    headers
+  })
   const json = await response.json();
   console.log(json);
 }

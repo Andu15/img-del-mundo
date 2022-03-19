@@ -15,10 +15,11 @@
       </router-link>
     </section>
     <main class="img-list">
-      <ImageContainer/>
-      <ImageContainer/>
-      <ImageContainer/>
-      <ImageContainer/>
+      <notifications position="top left" width="60%"  />
+      <h2 v-if="!tagWord">Intenta buscando algo</h2>
+      <div v-if="tagWord">
+        <ImageContainer v-for="image in images" :key="image.id" :image="image" />
+      </div>
     </main>
   </div>
 </template>
@@ -28,13 +29,23 @@
   import { Icon } from "@iconify/vue";
 
   import ImageContainer from "../components/ImageContainer.vue";
-  import { imageSearch } from "../services/pexels";
 
   export default {
     name: "Main",
     components: {
       Icon,
       ImageContainer
+    },
+    mounted() {
+      // this.$store.dispatch('')
+    },
+    computed:  {
+      images: function () {
+        return this.$store.state.images
+      },
+      sellers: function () {
+        return this.$store.state.sellers
+      }
     },
     data() {
       return {
@@ -45,7 +56,24 @@
     methods: {
       getWordTag(){
         this.tagWord = this.query;
-        // imageSearch("hola", 9)
+
+        this.$store.dispatch("getAllSellers");
+
+        const payload = {
+          searchWord: this.query,
+          // quantity: this.sellers.length
+          quantity: 6
+        }
+        if(this.query.length) {
+          this.$store.dispatch("getImages", payload);
+        } else {
+          this.$notify({
+            title: "Ups, El campo de búsqueda esta vacio",
+            text: "Intenta escribiendo algo y luego click en la lupita",
+            type: "error"
+          });
+        }
+        
       }
     }
   }
