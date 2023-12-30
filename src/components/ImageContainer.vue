@@ -1,9 +1,9 @@
 <template>
   <div class="img-container">
     <img class="img-item" :src="image.src.landscape" alt="prueba"/>
-    <p class="likes"><span>15</span> likes</p>
-    <p class="author">vendedor1</p>
-    <button class="likes-action-btn">
+    <p class="likes"><span>{{ likes }}</span> likes</p>
+    <p class="author">vendedor {{ id }}</p>
+    <button class="likes-action-btn" @click="increase">
       <Icon class="heart-icon" icon="el:heart-alt" height="30" />
     </button>
   </div>
@@ -19,8 +19,29 @@ export default {
 		Icon,
 	},
   props: [
-    'image'
-  ]
+    "image",
+    "id"
+  ],
+  data() {
+    return {
+      likes: 0
+    }
+  },
+  methods: {
+    async increase () {
+      this.likes++;
+      const seller = {
+        id: this.id,
+        likes: this.likes,
+        product: this.image.url,
+        idProduct: this.image.id,
+        photographer: this.image.photographer,
+        imgDescription: this.image.alt
+      }
+      
+      await this.$store.dispatch("updateInfo", seller);
+    }
+  }
 }
 </script>
 

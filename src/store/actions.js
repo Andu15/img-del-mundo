@@ -10,3 +10,8 @@ export const getAllSellers = async ({commit}) => {
   const result = await fetchSellers();
   commit("fillSellers", result);
 };
+
+
+export const updateInfo = ({commit}, seller) => {
+  commit("fillInfo", seller);
+}

@@ -18,7 +18,7 @@
       <notifications position="top left" width="60%"  />
       <h2 v-if="!tagWord">Intenta buscando algo</h2>
       <div v-if="tagWord">
-        <ImageContainer v-for="image in images" :key="image.id" :image="image" />
+        <ImageContainer v-for="(image, index) in images" :key="index" :image="image" :id="index"/>
       </div>
     </main>
   </div>
@@ -39,6 +39,9 @@
     mounted() {
       // this.$store.dispatch('')
     },
+    updated() {
+      // console.log("actualizado")
+    },
     computed:  {
       images: function () {
         return this.$store.state.images
@@ -54,18 +57,17 @@
       }
     },
     methods: {
-      getWordTag(){
+      async getWordTag (){
         this.tagWord = this.query;
 
-        this.$store.dispatch("getAllSellers");
+        await this.$store.dispatch("getAllSellers");
 
         const payload = {
           searchWord: this.query,
-          // quantity: this.sellers.length
-          quantity: 6
+          quantity: this.sellers.length
         }
         if(this.query.length) {
-          this.$store.dispatch("getImages", payload);
+          await this.$store.dispatch("getImages", payload);
         } else {
           this.$notify({
             title: "Ups, El campo de búsqueda esta vacio",

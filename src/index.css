@@ -11,27 +11,29 @@
 
 body {
   width: 80vw;
+  background: salmon;
   @apply m-auto font-inter
+  bg-neutral-main
 }
 
 .btn-large {
   transition: 1s;
   @apply
-  rounded-lg 
-  bg-primary-fluorescent-green
-  text-neutral-greenish-lead 
+  rounded-full
+  bg-secondary-main
+  text-neutral-light
   font-semibold
-  py-4
-  text-lg
+  /* py-4 */
+  /* text-lg */
   text-2xl
-  sm:text-4xl
-  sm:py-6
-  md:text-5xl
+  /* sm:text-4xl */
+  sm:py-4
+  /* md:text-5xl */
 }
 
 .btn-large:hover {
   @apply
-  bg-secondary-pasty-green
+  bg-primary-main
   text-neutral-soft-white
-  scale-95
+  /* scale-125 */
 }

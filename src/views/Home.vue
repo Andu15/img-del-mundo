@@ -47,15 +47,15 @@
     mx-auto
     sm:w-9/12
     md:w-7/12
-    lg:bg-neutral-greenish-lead
+    /* lg:bg-neutral-greenish-lead */
     lg:rounded-lg
     lg:w-1/2
-    lg:bg-neutral-light-grey
+    /* lg:bg-neutral-light-grey */
   }
 
   .welcome-text {
     @apply 
-    text-secondary-pasty-green 
+    text-secondary-main 
     font-bold 
     text-2xl	
     my-10
@@ -65,7 +65,7 @@
 
   .description-text {
     @apply 
-    text-primary-medium-green 
+    text-secondary-other
     font-normal 
     text-xl
     sm:text-3xl
