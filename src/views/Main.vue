@@ -3,22 +3,24 @@
     <section class="search-container">
       <label class="text-label" for="site-search">Buscar:</label>
       <div class="input-search-container">
-        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Escribe aquí..." v-model="query"/>
-        <Icon icon="fa-solid:search" color="#98f5e1" height="30" @click="getWordTag"/>
+        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Escribe aquí..." v-model="query" @keyup.enter="getWordTag"/>
+        <Icon icon="fa-solid:search" color="#2EC4B6" height="30" @click="getWordTag" />
       </div>
     </section>
     <section class="action-container">
-      <span class="search-word" v-if="tagWord.length">{{ tagWord }}</span>
+      <span class="search-word" v-if="tagWord.length">Palabra: {{ tagWord }}</span>
       <router-link to="positions" class="action-btn-container">
-        <Icon icon="bxs:medal" color="#98f5e1" height="30" class="my-auto"/>
+        <Icon icon="bxs:medal" color="#f8f9fa" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
       </router-link>
     </section>
     <main class="img-list">
-      <notifications position="top left" width="60%"  />
-      <h2 v-if="!tagWord">Intenta buscando algo</h2>
+      <!-- <notifications position="top left" width="60%"  /> -->
       <div v-if="tagWord">
         <ImageContainer v-for="(image, index) in images" :key="index" :image="image" :id="index"/>
+      </div>
+      <div v-else>
+        <p>Intenta buscando algo</p>
       </div>
     </main>
   </div>
@@ -102,7 +104,7 @@
 .text-label {
   text-align: left;
   @apply
-  text-secondary-pasty-green
+  text-secondary-main
   font-normal
   text-2xl
   my-auto
@@ -114,7 +116,7 @@
   flex
   justify-between
   rounded-lg
-  border-secondary-pasty-green
+  border-secondary-main
   border-2
   py-1
   px-4
@@ -123,33 +125,41 @@
 
 .input-search {
   outline: none;
+  background: none;
+  width: 95%;
   @apply
+  text-neutral-light
   lg:w-11/12
   lg:text-2xl
 }
 
 input::placeholder {
   @apply 
-  text-neutral-greenish-lead
+  /* text-neutral-greenish-lead */
   lg:text-xl
 }
 
 .action-container {
   @apply
-  flex
+  /* flex
   flex-row
   justify-between
   items-center
+  my-6 */
+  grid
+  grid-cols-5
   my-6
 }
 
 .search-word {
   @apply
-  bg-primary-aqua-green
-  text-neutral-greenish-lead
+  bg-neutral-secondary
+  text-neutral-light
   rounded-lg
   py-2
   px-3
+  col-start-1
+  col-end-2
   lg:text-lg	
 }
 
@@ -159,17 +169,23 @@ input::placeholder {
   flex-row
   justify-around
   content-center	
+  bg-secondary-main
+  rounded-lg
+  col-start-5
+  col-end-6
 }
 
 .action-btn-container:hover {
   @apply
-  bg-neutral-greenish-lead
+  /* bg-neutral-greenish-lead */
+  bg-primary-main
   rounded-lg
 }
 
 .text-btn {
   @apply
-  text-secondary-pasty-green
+  text-neutral-light
+  /* bg-secondary-main */
   my-auto
   py-2
   px-3
@@ -177,11 +193,12 @@ input::placeholder {
 }
 
 .text-btn:hover {
-  @apply
-  text-primary-fluorescent-green
+  /* @apply */
+  /* text-primary-fluorescent-green */
 }
 
 .img-list {
+  margin-top: 3rem;
   @apply
   grid
   grid-cols-1
