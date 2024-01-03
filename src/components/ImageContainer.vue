@@ -2,7 +2,7 @@
   <div class="img-container">
     <img class="img-item" :src="image.src.landscape" alt="prueba"/>
     <p class="likes"><span>{{ likes }}</span> likes</p>
-    <p class="author">vendedor {{ id }}</p>
+    <p class="author">vendedor {{ id + 1}}</p>
     <button class="likes-action-btn" @click="increase">
       <Icon class="heart-icon" icon="el:heart-alt" height="30" />
     </button>
@@ -63,6 +63,9 @@ export default {
 
 .likes {
   @apply
+  bg-primary-main
+  rounded-full
+  px-2.5
   text-neutral-soft-white
   font-normal
   absolute
@@ -72,6 +75,9 @@ export default {
 
 .author {
   @apply
+  bg-neutral-main
+  rounded-full
+  px-2.5
   font-normal
   text-neutral-greenish-lead
   absolute

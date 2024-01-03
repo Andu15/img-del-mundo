@@ -27,8 +27,6 @@
     <div></div>
   </div>
 </template>
-
-
 <script>
   import { Icon } from "@iconify/vue";
 
