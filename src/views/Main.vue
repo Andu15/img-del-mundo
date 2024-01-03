@@ -16,13 +16,15 @@
     </section>
     <main class="img-list">
       <!-- <notifications position="top left" width="60%"  /> -->
-      <div v-if="tagWord">
+      <div v-if="tagWord" class="image-container-panel">
         <ImageContainer v-for="(image, index) in images" :key="index" :image="image" :id="index"/>
       </div>
       <div v-else>
-        <p>Intenta buscando algo</p>
+        <p class="result-text">¡Opps, intenta buscando algo!</p>
       </div>
     </main>
+    <!-- loading -->
+    <div></div>
   </div>
 </template>
 
@@ -141,14 +143,11 @@ input::placeholder {
 
 .action-container {
   @apply
-  /* flex
-  flex-row
-  justify-between
-  items-center
-  my-6 */
   grid
-  grid-cols-5
+  grid-cols-2
   my-6
+  md:grid-cols-3
+  lg:grid-cols-5
 }
 
 .search-word {
@@ -171,8 +170,12 @@ input::placeholder {
   content-center	
   bg-secondary-main
   rounded-lg
-  col-start-5
-  col-end-6
+  col-start-2
+  col-end-3
+  md:col-start-3
+  md:col-end-4
+  lg:col-start-5
+  lg:col-end-6
 }
 
 .action-btn-container:hover {
@@ -196,16 +199,27 @@ input::placeholder {
   /* @apply */
   /* text-primary-fluorescent-green */
 }
-
 .img-list {
   margin-top: 3rem;
-  @apply
+  /* @apply
   grid
   grid-cols-1
   gap-x-2
   gap-y-4
   sm:grid-cols-2
-  lg:grid-cols-3
+  lg:grid-cols-3 */
 }
-
+.result-text {
+  /* text-align: center; */
+  @apply
+  text-neutral-light
+}
+.image-container-panel {
+  @apply
+  grid
+  grid-cols-1
+  gap-y-5
+  md:grid-cols-2
+  lg:grid-cols-3 
+}
 </style>
