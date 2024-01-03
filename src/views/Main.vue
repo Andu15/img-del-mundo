@@ -8,7 +8,7 @@
       </div>
     </section>
     <section class="action-container">
-      <span class="search-word" v-if="tagWord.length">Palabra: {{ tagWord }}</span>
+      <span class="search-word" v-if="query.length">Palabra: {{ query }}</span>
       <router-link to="positions" class="action-btn-container">
         <Icon icon="bxs:medal" color="#f8f9fa" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
@@ -16,7 +16,7 @@
     </section>
     <main class="img-list">
       <!-- <notifications position="top left" width="60%"  /> -->
-      <div v-if="tagWord" class="image-container-panel">
+      <div v-if="query" class="image-container-panel">
         <ImageContainer v-for="(image, index) in images" :key="index" :image="image" :id="index"/>
       </div>
       <div v-else>
@@ -57,28 +57,27 @@
     data() {
       return {
         query: '',
-        tagWord: ''
       }
     },
     methods: {
       async getWordTag (){
-        this.tagWord = this.query;
-
-        await this.$store.dispatch("getAllSellers");
+        await this.$store.dispatch("getAlegraSellers");
+        // await this.$store.dispatch("getAllSellers");
 
         const payload = {
           searchWord: this.query,
           quantity: this.sellers.length
         }
+
         if(this.query.length) {
           await this.$store.dispatch("getImages", payload);
-        } else {
-          this.$notify({
-            title: "Ups, El campo de búsqueda esta vacio",
-            text: "Intenta escribiendo algo y luego click en la lupita",
-            type: "error"
-          });
-        }
+        } //else {
+          // this.$notify({
+          //   title: "Ups, El campo de búsqueda esta vacio",
+          //   text: "Intenta escribiendo algo y luego click en la lupita",
+          //   type: "error"
+          // });
+        // }
         
       }
     }

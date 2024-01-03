@@ -5,29 +5,30 @@ const password = import.meta.env.VITE_ALEGRA_PASSWORD;
 
 const token = Base64.encode(`${username}:${password}`);
 
-// const options = {
 const headers = {
     "Accept": 'application/json',
     "Content-type": "application/json",
     "Authorization": `Basic ${token}`
-  }
-// }
+}
 
-const baseUrl = "https://api.alegra.com/api/v1/";
+const baseUrl = "https://api.alegra.com/api/v1";
 
 export const getSellers = async () => {
-  const url = `${baseUrl}sellers/`;
-  // const response = await fetch(url, {...options, method: "GET"});
-  const response = await fetch(url, {
-    method: 'GET',
-    headers
-  })
-  const json = await response.json();
-  console.log(json);
+  try {
+    const url = `${baseUrl}/sellers/`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers
+    })
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    throw Error(error.message)
+  }
 }
 
 export const updatePoints = async (idSeller, points) => {
-  const url = `${baseUrl}sellers/${idSeller}`;
+  const url = `${baseUrl}/sellers/${idSeller}`;
   const response = await fetch(url, {
     ...options,
     method: "PUT", 
@@ -40,7 +41,7 @@ export const updatePoints = async (idSeller, points) => {
 }
 
 export const generateInvoice = async (currentDate, expirationDate, idClient, idProduct, salePrice, description, amount) => {
-  const url = `${baseUrl}invoices`;
+  const url = `${baseUrl}/invoices`;
   const response = await fetch(url, {
     ...options,
     method: "POST", 
