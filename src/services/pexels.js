@@ -16,7 +16,6 @@ export const imageSearch = async (queryWord, amount) => {
   try {
     const response = await fetch(url, options);
     const json = await response.json();
-    console.log("imageSearch", json)
     return json.photos;
   } catch (error) {
     // console.log(error.message)

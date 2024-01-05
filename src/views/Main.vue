@@ -3,7 +3,7 @@
     <section class="search-container">
       <label class="text-label" for="site-search">Buscar:</label>
       <div class="input-search-container">
-        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Escribe aquí..." v-model="query" @keyup.enter="getWordTag"/>
+        <input class="input-search" type="search" id="site-search" name="site-search" placeholder="Busca una imagen" v-model="query" @keyup.enter="getWordTag"/>
         <Icon icon="fa-solid:search" color="#2EC4B6" height="30" @click="getWordTag" />
       </div>
     </section>
@@ -17,7 +17,13 @@
     <main class="img-list">
       <!-- <notifications position="top left" width="60%"  /> -->
       <div v-if="query" class="image-container-panel">
-        <ImageContainer v-for="(image, index) in images" :key="index" :image="image" :id="index"/>
+        <ImageContainer 
+        v-for="(image, index) in images" 
+        :key="index" 
+        :image="image" 
+        :id="index"
+        @like="handleLike"
+        />
       </div>
       <div v-else>
         <p class="result-text">¡Opps, intenta buscando algo!</p>
@@ -77,7 +83,21 @@
           // });
         // }
         
-      }
+      },
+      getLikesForImage(index) {
+        const seller = this.sellers[index];
+        return seller ? seller.likes : 0;
+      },
+      handleLike(index) {
+        const seller = this.sellers[index];
+        console.log("seller", seller)
+        if (seller) {
+          this.$store.dispatch("updateInfo", {
+            id: index,
+            likes: seller.likes + 1,
+          });
+        }
+      },
     }
   }
 </script>

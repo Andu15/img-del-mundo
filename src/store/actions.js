@@ -19,6 +19,6 @@ export const getAlegraSellers = async ({commit}) => {
 }
 
 
-export const updateInfo = ({commit}, seller) => {
-  commit("fillInfo", seller);
-}
+// export const updateInfo = ({commit}, seller) => {
+//   commit("fillInfo", seller);
+// }

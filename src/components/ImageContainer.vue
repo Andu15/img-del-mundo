@@ -1,15 +1,13 @@
 <template>
   <div class="img-container">
-    <img class="img-item" :src="image.src.landscape" alt="prueba"/>
+    <img class="img-item" :src="image.src.landscape" alt="image"/>
     <p class="likes"><span>{{ likes }}</span> likes</p>
     <p class="author">vendedor {{ id + 1}}</p>
-    <button class="likes-action-btn" @click="increase">
+    <button class="likes-action-btn" @click="likeButton" :style="isLike ? 'color:#03045E' : 'color:#2EC4B6'">
       <Icon class="heart-icon" icon="el:heart-alt" height="30" />
     </button>
   </div>
 </template>
-
-
 <script>
 import { Icon } from '@iconify/vue';
 
@@ -24,22 +22,43 @@ export default {
   ],
   data() {
     return {
+      isLike: false,
       likes: 0
     }
   },
+  watch: {
+    isLike(){
+      this.handlerClicks()
+    }
+  },
   methods: {
-    async increase () {
-      this.likes++;
-      const seller = {
-        id: this.id,
-        likes: this.likes,
-        product: this.image.url,
-        idProduct: this.image.id,
-        photographer: this.image.photographer,
-        imgDescription: this.image.alt
-      }
+    async likeButton() {
+      this.isLike = !this.isLike
+      // this.$emit("like", this.id)
+      // this.likes++;
+      // const seller = {
+      //   id: this.id,
+      //   likes: this.likes,
+      //   product: this.image.url,
+      //   idProduct: this.image.id,
+      //   photographer: this.image.photographer,
+      //   imgDescription: this.image.alt
+      // }
       
-      await this.$store.dispatch("updateInfo", seller);
+      // await this.$store.dispatch("updateInfo", seller);
+    },
+    async handlerClicks(){
+      this.likes += 3
+
+      const seller = {
+        sellerId: this.id,
+        imageId: this.image.id,
+        imageLike: this.likes
+      }
+
+      await this.$store.commit("fillInfo", seller)
+      await this.$store.commit("fillImages", [])
+      await this.$store.commit("fillSellers", [])
     }
   }
 }
@@ -86,9 +105,10 @@ export default {
 }
 
 .likes-action-btn {
+  transition: 1s;
   @apply
   absolute
-  text-primary-fluorescent-green
+  /* text-secondary-main */
   bottom-4
   right-4
   flex
@@ -110,7 +130,7 @@ export default {
 
 .likes-action-btn:hover {
   @apply
-  text-neutral-greenish-lead
+  /* text-primary-main */
   scale-110
   cursor-pointer
 }
