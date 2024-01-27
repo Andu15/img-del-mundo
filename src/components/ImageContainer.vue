@@ -34,18 +34,6 @@ export default {
   methods: {
     async likeButton() {
       this.isLike = !this.isLike
-      // this.$emit("like", this.id)
-      // this.likes++;
-      // const seller = {
-      //   id: this.id,
-      //   likes: this.likes,
-      //   product: this.image.url,
-      //   idProduct: this.image.id,
-      //   photographer: this.image.photographer,
-      //   imgDescription: this.image.alt
-      // }
-      
-      // await this.$store.dispatch("updateInfo", seller);
     },
     async handlerClicks(){
       this.likes += 3
@@ -63,7 +51,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .img-container {
   @apply

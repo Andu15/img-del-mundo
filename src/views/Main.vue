@@ -9,25 +9,33 @@
     </section>
     <section class="action-container">
       <span class="search-word" v-if="query.length">Palabra: {{ query }}</span>
-      <router-link to="positions" class="action-btn-container">
+      <router-link to="positions" class="action-btn-container" v-if="sellersInfo">
         <Icon icon="bxs:medal" color="#f8f9fa" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
       </router-link>
+      <h3 class="score-span">Puntaje máximo: {{ topScore }}</h3>
     </section>
     <main class="img-list">
       <!-- <notifications position="top left" width="60%"  /> -->
-      <div v-if="query" class="image-container-panel">
-        <ImageContainer 
-        v-for="(image, index) in images" 
-        :key="index" 
-        :image="image" 
-        :id="index"
-        @like="handleLike"
-        />
-      </div>
-      <div v-else>
+      <section v-if="query">
+        <article v-if="!isTopScore" class="image-container-panel">
+          <ImageContainer 
+          v-for="(image, index) in images" 
+          :key="index" 
+          :image="image" 
+          :id="index"
+          />
+        </article>
+        <article class="goal-container" v-else>
+          <img class="flag-image" src="../assets/flag.png" alt="final de la carrera imagen"/>
+          <h3 class="goal-text-main">La carrera ha terminado</h3>
+          <p class="goal-text-secondary">Emite la factura ganadora</p>
+          <button class="invoice-btn">Factura</button>
+        </article>
+      </section>
+      <section v-else>
         <p class="result-text">¡Opps, intenta buscando algo!</p>
-      </div>
+      </section>
     </main>
     <!-- loading -->
     <div></div>
@@ -56,12 +64,25 @@
       },
       sellers: function () {
         return this.$store.state.sellers
+      },
+      sellersInfo: function () {
+        return this.$store.state.sellersInfo.length > 3
       }
     },
     data() {
       return {
         query: '',
+        isTopScore: false,
+        topScore: 0
       }
+    },
+    watch: {
+      '$store.state.sellersInfo': {
+        handler(newValue, oldValue) {
+          this.analyzeScore()
+        },
+        deep: true,
+      },
     },
     methods: {
       async getWordTag (){
@@ -88,21 +109,19 @@
         const seller = this.sellers[index];
         return seller ? seller.likes : 0;
       },
-      handleLike(index) {
-        const seller = this.sellers[index];
-        console.log("seller", seller)
-        if (seller) {
-          this.$store.dispatch("updateInfo", {
-            id: index,
-            likes: seller.likes + 1,
-          });
+      analyzeScore() {
+        const maximumScore = this.$store.state.sellersInfo.find((vendedor) => vendedor.score >= 20)
+        if(maximumScore !== undefined){
+          console.log("maximumScore", maximumScore)
+          this.isTopScore = true
+          this.topScore = maximumScore.score
+        } else {
+          this.isTopScore = false
         }
-      },
+      }
     }
   }
 </script>
-
-
 <style scoped>
 .container {
   @apply
@@ -110,7 +129,6 @@
   mt-6
   lg:mt-12
 }
-
 .search-container {
   @apply
   flex
@@ -119,7 +137,6 @@
   lg:flex-row
   lg:justify-between
 }
-
 .text-label {
   text-align: left;
   @apply
@@ -129,7 +146,6 @@
   my-auto
   lg:text-3xl
 }
-
 .input-search-container {
   @apply
   flex
@@ -141,7 +157,6 @@
   px-4
   lg:w-10/12
 }
-
 .input-search {
   outline: none;
   background: none;
@@ -151,13 +166,35 @@
   lg:w-11/12
   lg:text-2xl
 }
-
 input::placeholder {
   @apply 
   /* text-neutral-greenish-lead */
   lg:text-xl
 }
-
+.goal-container {
+  width: 100%;
+  margin: auto;
+}
+.flag-image {
+  width:200px;
+  margin: auto;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 15px;
+  margin-bottom: 4rem;
+  @apply
+  bg-neutral-main
+}
+.goal-text-main {
+  font-size: 20px;
+  @apply
+  text-neutral-other
+}
+.goal-text-secondary {
+  font-size: 17px;
+  @apply
+  text-neutral-secondary
+}
 .action-container {
   @apply
   grid
@@ -201,7 +238,20 @@ input::placeholder {
   bg-primary-main
   rounded-lg
 }
-
+.score-span {
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  padding: 5px;
+  @apply
+  bg-primary-main
+  text-primary-other
+  text-center
+  col-start-1
+  col-end-3
+  md:col-end-4
+  lg:col-end-6
+  font-semibold
+}
 .text-btn {
   @apply
   text-neutral-light
@@ -225,6 +275,15 @@ input::placeholder {
   gap-y-4
   sm:grid-cols-2
   lg:grid-cols-3 */
+}
+.invoice-btn {
+  @apply 
+  my-20
+  bg-primary-main
+}
+.invoice-btn:hover, .invoice-btn:active {
+  @apply 
+  bg-primary-main
 }
 .result-text {
   /* text-align: center; */
