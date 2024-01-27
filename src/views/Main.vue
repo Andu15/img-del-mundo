@@ -37,8 +37,7 @@
           <article class="goal-container" v-else>
             <img class="flag-image" src="../assets/flag.png" alt="final de la carrera imagen"/>
             <h3 class="goal-text-main">La carrera ha terminado</h3>
-            <p class="goal-text-secondary">Emite la factura ganadora</p>
-            <button class="invoice-btn">Factura</button>
+            <p class="goal-text-secondary">Gracias por participar</p>
           </article>
         </div>
       </section>
@@ -116,18 +115,31 @@
         const seller = this.sellers[index]
         return seller ? seller.likes : 0
       },
-      analyzeScore() {
-        const maximumScore = this.$store.state.sellersInfo.find((vendedor) => vendedor.score >= 20)
+      async analyzeScore() {
+        const sellersInfo = await this.$store.state.sellersInfo
+        const maximumScore = sellersInfo.find((vendedor) => vendedor.score >= 20)
         if(maximumScore !== undefined){
-          console.log("maximumScore", maximumScore)
           this.isTopScore = true
-          this.topScore = maximumScore.score
         } else {
           this.isTopScore = false
         }
       },
-      cleanQuery(){
-        this.query = ''
+      async cleanQuery(){
+        await this.findMaximumScore()
+
+        if(this.topScore < 20){
+          this.query = ''
+        }
+      },
+      async findMaximumScore(){
+        const sellersInfo = await this.$store.state.sellersInfo
+
+        if (sellersInfo.length > 0){
+          const getMaximumScore = sellersInfo.reduce((a, b) => (b.score > a ? b.score : a), 0)
+          this.topScore = getMaximumScore;
+        } else {
+          this.topScore = 0
+        }
       }
     }
   }
