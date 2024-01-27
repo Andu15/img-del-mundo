@@ -10,7 +10,7 @@
       <p class="description-text">Encontrarás las mejores imágenes del mundo</p>
       <div class="btn-group">
         <router-link to="main" class="btn-large btn-start">Usuario</router-link>
-        <router-link to="main" class="btn-large btn-start">Vendedor</router-link>
+        <router-link to="positions" class="btn-large btn-start">Vendedor</router-link>
       </div>
     </section>
   </div>

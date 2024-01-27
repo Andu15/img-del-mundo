@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <h2 class="main-title">¡Qué comience la carrera!</h2>
+    <p class="main-subtitle">Por cada imagen que selecciones se le brindará 3 puntos al vendedor, cuando alguno de los vendedores supere los 20 pts, se termina la carrera.</p>
+    <p class="score-span">Puntaje máximo: {{ topScore }} pts</p>
     <section class="search-container">
       <label class="text-label" for="site-search">Buscar:</label>
       <div class="input-search-container">
@@ -9,40 +12,46 @@
     </section>
     <section class="action-container">
       <span class="search-word" v-if="query.length">Palabra: {{ query }}</span>
-      <router-link to="positions" class="action-btn-container" v-if="sellersInfo">
+      <!-- <router-link to="positions" class="action-btn-container" v-if="sellersInfo">
         <Icon icon="bxs:medal" color="#f8f9fa" height="30" class="my-auto"/>
         <p class="text-btn">Posiciones</p>
-      </router-link>
-      <h3 class="score-span">Puntaje máximo: {{ topScore }}</h3>
+      </router-link> -->
     </section>
     <main class="img-list">
-      <!-- <notifications position="top left" width="60%"  /> -->
-      <section v-if="query">
-        <article v-if="!isTopScore" class="image-container-panel">
-          <ImageContainer 
-          v-for="(image, index) in images" 
-          :key="index" 
-          :image="image" 
-          :id="index"
-          />
-        </article>
-        <article class="goal-container" v-else>
-          <img class="flag-image" src="../assets/flag.png" alt="final de la carrera imagen"/>
-          <h3 class="goal-text-main">La carrera ha terminado</h3>
-          <p class="goal-text-secondary">Emite la factura ganadora</p>
-          <button class="invoice-btn">Factura</button>
-        </article>
+      <section v-if="query.length">
+        <div v-if="isLoading">
+          <loading v-model:active="isLoading"
+                 :can-cancel="true"
+                 :is-full-page="fullPage"/>
+        </div>
+        <div v-else>
+          <article v-if="!isTopScore" class="image-container-panel">
+            <ImageContainer 
+            @cleanQuery="cleanQuery"
+            v-for="(image, index) in images" 
+            :key="index" 
+            :image="image" 
+            :id="index"
+            />
+          </article>
+          <article class="goal-container" v-else>
+            <img class="flag-image" src="../assets/flag.png" alt="final de la carrera imagen"/>
+            <h3 class="goal-text-main">La carrera ha terminado</h3>
+            <p class="goal-text-secondary">Emite la factura ganadora</p>
+            <button class="invoice-btn">Factura</button>
+          </article>
+        </div>
       </section>
       <section v-else>
         <p class="result-text">¡Opps, intenta buscando algo!</p>
       </section>
     </main>
-    <!-- loading -->
-    <div></div>
   </div>
 </template>
 <script>
   import { Icon } from "@iconify/vue";
+  import Loading from 'vue-loading-overlay';
+  import 'vue-loading-overlay/dist/css/index.css';
 
   import ImageContainer from "../components/ImageContainer.vue";
 
@@ -50,7 +59,8 @@
     name: "Main",
     components: {
       Icon,
-      ImageContainer
+      ImageContainer,
+      Loading
     },
     mounted() {
       // this.$store.dispatch('')
@@ -73,7 +83,9 @@
       return {
         query: '',
         isTopScore: false,
-        topScore: 0
+        topScore: 0,
+        isLoading: false,
+        fullPage: true
       }
     },
     watch: {
@@ -86,6 +98,7 @@
     },
     methods: {
       async getWordTag (){
+        this.isLoading = true
         await this.$store.dispatch("getAlegraSellers");
         // await this.$store.dispatch("getAllSellers");
 
@@ -96,18 +109,12 @@
 
         if(this.query.length) {
           await this.$store.dispatch("getImages", payload);
-        } //else {
-          // this.$notify({
-          //   title: "Ups, El campo de búsqueda esta vacio",
-          //   text: "Intenta escribiendo algo y luego click en la lupita",
-          //   type: "error"
-          // });
-        // }
-        
+        } 
+        this.isLoading = false
       },
       getLikesForImage(index) {
-        const seller = this.sellers[index];
-        return seller ? seller.likes : 0;
+        const seller = this.sellers[index]
+        return seller ? seller.likes : 0
       },
       analyzeScore() {
         const maximumScore = this.$store.state.sellersInfo.find((vendedor) => vendedor.score >= 20)
@@ -118,6 +125,9 @@
         } else {
           this.isTopScore = false
         }
+      },
+      cleanQuery(){
+        this.query = ''
       }
     }
   }
@@ -128,6 +138,19 @@
   m-auto
   mt-6
   lg:mt-12
+}
+.main-title {
+  @apply
+  text-secondary-main
+  font-bold 
+  text-2xl
+  my-5
+  sm:text-3xl
+}
+.main-subtitle {
+  @apply
+  text-neutral-other
+  text-lg
 }
 .search-container {
   @apply
@@ -239,7 +262,7 @@ input::placeholder {
   rounded-lg
 }
 .score-span {
-  margin-top: 2rem;
+  margin-top: .5rem;
   border-radius: 0.5rem;
   padding: 5px;
   @apply
@@ -251,6 +274,7 @@ input::placeholder {
   md:col-end-4
   lg:col-end-6
   font-semibold
+  mb-10
 }
 .text-btn {
   @apply

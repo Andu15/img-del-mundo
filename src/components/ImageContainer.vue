@@ -34,6 +34,7 @@ export default {
   methods: {
     async likeButton() {
       this.isLike = !this.isLike
+      this.$emit("cleanQuery")
     },
     async handlerClicks(){
       this.likes += 3
