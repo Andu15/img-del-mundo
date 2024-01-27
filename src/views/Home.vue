@@ -6,9 +6,12 @@
             srcset="../assets/imagenes_del_mundo_logo-removebg.png"/>
     </section>
     <section class="introduction-container">
-      <h2 class="welcome-text">Bienvenido</h2>
+      <h2 class="welcome-text">Bienvenid@</h2>
       <p class="description-text">Encontrarás las mejores imágenes del mundo</p>
-      <router-link to="main" class="btn-large btn-start">Empezar</router-link>
+      <div class="btn-group">
+        <router-link to="main" class="btn-large btn-start">Usuario</router-link>
+        <router-link to="main" class="btn-large btn-start">Vendedor</router-link>
+      </div>
     </section>
   </div>
 </template>
@@ -69,14 +72,22 @@
     font-normal 
     text-xl
     sm:text-3xl
-    md:text-4xl
   }
-
+  .btn-group {
+    @apply 
+    flex 
+    flex-col 
+    justify-center 
+    items-center
+    w-full 
+    mx-auto
+    mt-10
+  }
   .btn-start {
-    @apply my-20
-    md:w-4/5
-    md:mx-auto
-    lg:mx-auto
+    @apply 
+    my-5
+    w-4/5
+    py-2
     xl:md:w-3/4
   }
 </style>
