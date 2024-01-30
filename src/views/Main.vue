@@ -12,10 +12,10 @@
     </section>
     <section class="action-container">
       <span class="search-word" v-if="query.length">Palabra: {{ query }}</span>
-      <!-- <router-link to="positions" class="action-btn-container" v-if="sellersInfo">
-        <Icon icon="bxs:medal" color="#f8f9fa" height="30" class="my-auto"/>
-        <p class="text-btn">Posiciones</p>
-      </router-link> -->
+      <router-link to="/" v-if="isTopScore" class="action-btn-container">
+        <Icon icon="ic:round-home" color="#f8f9fa" height="30" class="my-auto"/>
+        <p class="text-btn">Ir a inicio</p>
+      </router-link>
     </section>
     <main class="img-list">
       <section v-if="query.length">
