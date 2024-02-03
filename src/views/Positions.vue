@@ -3,17 +3,16 @@
     <h2 class="title-view">Posiciones:</h2>
     <section class="summary-container">
       <div class="intro-summary-container">
-        <p class="description-text">Ya tenemos un ganador</p>
-        <span class="winner-seller">Vendedor 1</span>
+        <p class="description-text">{{ textResult }}</p>
+        <span class="winner-seller">{{ winningSeller }}</span>
         <img src="../assets/podio.png" alt="medals"/>
       </div>
-      <section class="info-summary-container">
+      <section class="info-summary-container" v-if="vendors.length > 0">
         <div class="ref-tag">
           <p>Nombre</p>
           <p>Tiene / Falta</p>
         </div>
-        <div>
-          <SellerScore/>
+        <div v-for="(vendor, index) in vendors" :key="index">
           <SellerScore/>
         </div>
         <div class="invoice-btn-container">
@@ -40,6 +39,53 @@
       Icon,
       SellerScore,
       StartButton
+    },
+    mounted() {
+      this.getWinners()
+    },
+    computed: {
+      // getWinners: function () {
+      //   const sellersInfo = this.$store.state.sellersInfo
+      //   const maximumScore = sellersInfo.find((vendedor) => vendedor.score >= 20)
+      //   console.log("maximumScore", maximumScore)
+      //   if(maximumScore !== undefined){
+      //     this.textResult = "Ya tenemos un ganador"
+      //     this.winningSeller = ""
+      //   } else {
+      //     this.textResult = "Aún no tenemos ganador"
+      //     this.winningSeller = "Sigamos jugando"
+      //   }
+      // }
+    },
+    data(){
+      return {
+        vendors: {},
+        textResult: '',
+        winningSeller: ''
+      }
+    },
+    watch: {
+      '$store.state.sellersInfo': {
+        handler(newValue, oldValue) {
+          this.getWinners()
+        },
+        deep: true,
+      },
+    },
+    methods: {
+      async getWinners (){
+        this.vendors = await this.$store.state.sellersInfo
+        console.log("vendors", this.vendors)
+        const maximumScore = this.vendors.find((vendedor) => vendedor.score >= 20)
+
+        if(maximumScore !== undefined){
+          this.textResult = "Ya tenemos un ganador"
+          this.winningSeller = ""
+        } else {
+          this.textResult = "Aún no tenemos ganador"
+          this.winningSeller = "Sigamos jugando"
+        }
+      }
     }
   }
 </script>
