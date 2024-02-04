@@ -1,15 +1,14 @@
 <template>
   <div class="scores-container">
-    <span class="seller-name">Vendedor1</span>
+    <span class="seller-name" v-if="infoVendor && infoVendor.name">{{ infoVendor.name }}</span>
     <div class="score-info-container">
-      <span class="current-points">20</span>
+      <strongs class="current-points">{{ vendor.score }}</strongs>
+      <Icon icon="mdi:heart-circle" height="30" />
       <p class="slash">/</p>
       <span class="missing-points">20</span>
-      <Icon icon="mdi:heart-circle" height="30" />
     </div>
   </div>
 </template>
-
 
 <script>
 import { Icon } from '@iconify/vue';
@@ -18,7 +17,27 @@ export default {
   name: 'SellerScore',
   components: {
 		Icon,
-	}
+	},
+  props: {
+    vendor: Object
+  },
+  data(){
+      return {
+        infoVendor: {}
+      }
+  },
+  methods: {
+    async loadInfoVendor() {  
+      if (this.vendor && this.vendor.sellerId) {
+        console.log("id real", this.vendor.sellerId)
+        this.infoVendor = await this.$store.dispatch("getAlegraSellerByID", this.vendor.sellerId)
+        console.log("infoVEndor", this.infoVendor)
+      }
+    }
+  },
+  created(){
+    this.loadInfoVendor()
+  }
 }
 </script>
 
@@ -34,11 +53,11 @@ export default {
     px-4
     text-base
     font-normal
-    my-5
+    mb-5
     content-center
-    sm:py-4
+    sm:pb-4
     sm:px-6
-    lg:my-7
+    lg:mb-7
   }
 
   .seller-name {

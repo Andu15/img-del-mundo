@@ -2,7 +2,7 @@
   <div class="img-container">
     <img class="img-item" :src="image.src.landscape" alt="image"/>
     <p class="likes"><span>{{ likes }}</span> likes</p>
-    <p class="author">vendedor {{ id + 1}}</p>
+    <p class="author">vendedor {{ id }}</p>
     <button class="likes-action-btn" @click="likeButton" :style="isLike ? 'color:#03045E' : 'color:#2EC4B6'">
       <Icon class="heart-icon" icon="el:heart-alt" height="30" />
     </button>

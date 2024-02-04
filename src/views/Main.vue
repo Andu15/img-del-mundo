@@ -31,7 +31,7 @@
             v-for="(image, index) in images" 
             :key="index" 
             :image="image" 
-            :id="index"
+            :id="index + 1"
             />
           </article>
           <article class="goal-container" v-else>
@@ -99,13 +99,12 @@
       async getWordTag (){
         this.isLoading = true
         await this.$store.dispatch("getAlegraSellers");
-        // await this.$store.dispatch("getAllSellers");
 
         const payload = {
           searchWord: this.query,
           quantity: this.sellers.length
         }
-
+        
         if(this.query.length) {
           await this.$store.dispatch("getImages", payload);
         } 

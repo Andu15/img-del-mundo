@@ -27,6 +27,20 @@ export const getSellers = async () => {
   }
 }
 
+export const getSellerById = async (ID) => {
+  try {
+    const url = `${baseUrl}/sellers/${ID}`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers
+    })
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    throw Error(error.message)
+  }
+}
+
 export const updatePoints = async (idSeller, points) => {
   const url = `${baseUrl}/sellers/${idSeller}`;
   const response = await fetch(url, {

@@ -9,18 +9,19 @@
       </div>
       <section class="info-summary-container" v-if="vendors.length > 0">
         <div class="ref-tag">
-          <p>Nombre</p>
+          <p>Vendedor</p>
           <p>Tiene / Falta</p>
         </div>
         <div v-for="(vendor, index) in vendors" :key="index">
-          <SellerScore/>
+          <SellerScore :vendor="vendor" />
         </div>
         <div class="invoice-btn-container">
           <router-link to="invoice" class="invoice-btn">
             <Icon class="invoice-icon" icon="fa-solid:file-invoice-dollar" height="30" />
             <p>Reclamar Factura</p>
           </router-link>
-          <StartButton/>
+          <StartButton />
+          <ResetButton />
         </div>
       </section>
     </section>
@@ -32,13 +33,15 @@
 
   import SellerScore from "../components/SellerScore.vue";
   import StartButton from "../components/StartButton.vue";
+  import ResetButton from "../components/ResetButton.vue";
 
   export default {
     name: "Positions",
     components: {
       Icon,
       SellerScore,
-      StartButton
+      StartButton,
+      ResetButton
     },
     mounted() {
       this.getWinners()
@@ -59,7 +62,7 @@
     },
     data(){
       return {
-        vendors: {},
+        vendors: [],
         textResult: '',
         winningSeller: ''
       }
@@ -75,7 +78,6 @@
     methods: {
       async getWinners (){
         this.vendors = await this.$store.state.sellersInfo
-        console.log("vendors", this.vendors)
         const maximumScore = this.vendors.find((vendedor) => vendedor.score >= 20)
 
         if(maximumScore !== undefined){
@@ -86,6 +88,9 @@
           this.winningSeller = "Sigamos jugando"
         }
       }
+    },
+    updated(){
+      // console.log("vendors", this.vendors)
     }
   }
 </script>
@@ -182,6 +187,7 @@
     justify-between
     content-center
     relative
+    gap-x-2.5
   }
 
   .invoice-btn {
