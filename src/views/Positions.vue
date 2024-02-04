@@ -16,8 +16,8 @@
           <SellerScore :vendor="vendor" />
         </div>
         <div class="invoice-btn-container">
-          <router-link to="invoice" class="invoice-btn">
-            <Icon class="invoice-icon" icon="fa-solid:file-invoice-dollar" height="30" />
+          <router-link to="invoice" class="invoice-btn btn-large">
+            <Icon icon="fa-solid:file-invoice-dollar" height="30" />
             <p>Reclamar Factura</p>
           </router-link>
           <StartButton />
@@ -105,7 +105,7 @@
 
   .title-view {
     @apply 
-    text-secondary-pasty-green
+    text-secondary-main
     text-left
     text-xl
     font-medium
@@ -136,7 +136,7 @@
 
   .description-text {
     @apply
-    text-neutral-greenish-lead
+    text-secondary-other
     font-normal
     text-lg
     my-2
@@ -146,7 +146,7 @@
 
   .winner-seller {
     @apply
-    text-primary-medium-green
+    text-secondary-secondary
     font-normal
     text-lg
     my-2
@@ -172,7 +172,7 @@
     flex-row
     justify-between
     font-normal
-    text-primary-medium-green
+    text-secondary-secondary
     text-lg
     mt-4
     mb-2
@@ -192,11 +192,9 @@
 
   .invoice-btn {
     @apply
-    bg-primary-fluorescent-green
     rounded-lg
     flex
     flex-row
-    text-neutral-greenish-lead
     justify-center
     py-2
     text-lg
@@ -212,8 +210,6 @@
 
   .invoice-btn:hover {
     @apply
-    bg-neutral-greenish-lead
-    text-primary-fluorescent-green
     duration-500
   }
 

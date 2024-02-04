@@ -202,7 +202,6 @@
 }
 input::placeholder {
   @apply 
-  /* text-neutral-greenish-lead */
   lg:text-xl
 }
 .goal-container {
@@ -268,7 +267,6 @@ input::placeholder {
 
 .action-btn-container:hover {
   @apply
-  /* bg-neutral-greenish-lead */
   bg-primary-main
   rounded-lg
 }

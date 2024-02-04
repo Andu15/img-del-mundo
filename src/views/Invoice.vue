@@ -44,21 +44,21 @@
     flex-col
     content-center	
     my-auto
-    border-secondary-pasty-green
+    border-secondary-main
     border-b-2
     ml-4
     w-10/12
   }
   .title {
     @apply
-    text-secondary-pasty-green
+    text-secondary-main
     text-left
     text-xl
     font-semibold
   }
   .subtitle {
     @apply
-    text-neutral-greenish-lead
+    text-secondary-other
     text-left
     text-sm
   }
@@ -71,13 +71,13 @@
   }
   .title-date {
     @apply
-    text-primary-medium-green
+    text-secondary-secondary
     font-medium
     text-base
   }
   .date {
     @apply
-    text-neutral-greenish-lead
+    text-secondary-other
     font-medium
     text-base
   }
@@ -88,8 +88,8 @@
   }
   .subtitle-text {
     @apply
-    bg-secondary-pasty-green
-    text-neutral-soft-white
+    bg-secondary-main
+    text-neutral-light
     font-medium
     col-span-2
     mb-1
@@ -98,8 +98,8 @@
   }
   .text-content {
     @apply
-    text-neutral-soft-white
-    bg-neutral-greenish-lead
+    text-neutral-light
+    bg-secondary-other
     text-left
     px-2
     py-2
@@ -108,8 +108,8 @@
   }
   .text-content-2 {
     @apply
-    text-neutral-soft-white
-    bg-neutral-greenish-lead
+    text-neutral-light
+    bg-secondary-other
     col-span-2
     text-left
     px-2

@@ -1,6 +1,6 @@
 <template>
-  <router-link to="/" class="home-btn-container">
-    <Icon class="home-btn" icon="ant-design:home-filled" height="30" />
+  <router-link to="/" class="btn-large home-btn-container">
+    <Icon icon="ant-design:home-filled" height="30" />
   </router-link>
 </template>
 
@@ -19,17 +19,8 @@
   .home-btn-container {
     @apply
     my-auto
-    bg-primary-fluorescent-green
     rounded-full
     p-2
-    text-neutral-soft-white
     sm:p-3
   }
-
-  .home-btn-container:hover {
-    @apply
-    bg-neutral-soft-white
-    text-neutral-greenish-lead
-  }
-
 </style>

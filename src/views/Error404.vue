@@ -30,7 +30,7 @@
 
 <style scoped>
   body {
-    @apply text-secondary-navy-blue
+    @apply text-secondary-main
   }
 
   a {
@@ -76,7 +76,7 @@
   width: 12.2rem;
   height: 11.4rem;
   border-radius: 50%;
-  @apply bg-secondary-navy-blue
+  @apply bg-secondary-main
 }
 
 .clip {
@@ -99,7 +99,7 @@
   height: 12.4rem;
   border: 0.3rem;
   border-radius: 0.8rem;
-  @apply bg-neutral-soft-white border-solid border-secondary-navy-blue
+  @apply bg-neutral-light border-solid border-secondary-main
 }
 
 .paper::before {
@@ -112,7 +112,7 @@
   border-bottom: 0.3rem;
   transform: rotate(45deg);
   background-color: white;
-  @apply  border-solid border-secondary-navy-blue
+  @apply  border-solid border-secondary-main
 }
 
 .face {
@@ -138,7 +138,7 @@
   animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
-  @apply bg-secondary-navy-blue
+  @apply bg-secondary-main
 }
 
 .eye-left{
@@ -173,7 +173,7 @@
   width: 1rem;
   height: 0.2rem;
   border-radius: 50%;
-  @apply bg-secondary-pinkish
+  @apply bg-neutral-light
 }
 
 .rosyCheeks-left {
@@ -192,23 +192,23 @@
   height: 0.2rem;
   border-radius: 0.1rem;
   transform: translateX(-50%);
-  @apply bg-secondary-navy-blue
+  @apply bg-secondary-main
 }
 
 .text {
   margin-top: 5rem;
   font-weight: 300;
-  @apply text-secondary-navy-blue font-medium text-lg
+  @apply text-secondary-main font-medium text-lg
 }
 
 .button {
   margin-top: 4rem;
   padding: 1.2rem 3rem;
-  @apply text-neutral-greenish-lead bg-primary-fluorescent-green rounded-lg
+  @apply text-secondary-other bg-secondary-main rounded-lg
 }
 
 .button:hover {
-  @apply bg-primary-medium-green text-neutral-soft-white
+  @apply bg-secondary-secondary text-neutral-light
 }
 
 .by {
@@ -216,11 +216,11 @@
   bottom: 0.5rem;
   left: 0.5rem;
   text-transform: uppercase;
-  @apply text-secondary-navy-blue
+  @apply text-secondary-main
 } 
 
 .byLink {
-  @apply text-primary-medium-green
+  @apply text-secondary-secondary
 }
 
 </style>

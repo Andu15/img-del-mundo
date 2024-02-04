@@ -73,7 +73,7 @@ export default {
   bg-primary-main
   rounded-full
   px-2.5
-  text-neutral-soft-white
+  text-neutral-light
   font-normal
   absolute
   top-2
@@ -86,7 +86,7 @@ export default {
   rounded-full
   px-2.5
   font-normal
-  text-neutral-greenish-lead
+  text-secondary-other
   absolute
   top-2
   right-2

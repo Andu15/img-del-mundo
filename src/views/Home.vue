@@ -50,10 +50,8 @@
     mx-auto
     sm:w-9/12
     md:w-7/12
-    /* lg:bg-neutral-greenish-lead */
     lg:rounded-lg
     lg:w-1/2
-    /* lg:bg-neutral-light-grey */
   }
 
   .welcome-text {

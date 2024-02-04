@@ -47,7 +47,7 @@ export default {
     flex
     flex-row
     justify-between
-    bg-neutral-greenish-lead
+    bg-neutral-secondary
     rounded-lg
     py-2
     px-4
@@ -62,7 +62,7 @@ export default {
 
   .seller-name {
     @apply
-    text-neutral-soft-white
+    text-neutral-light
     my-auto
     sm:text-xl
   }
@@ -71,7 +71,7 @@ export default {
     @apply
     grid
     grid-cols-4
-    text-primary-medium-green
+    text-secondary-secondary
     sm:text-xl
   }
 
@@ -90,7 +90,7 @@ export default {
 
   .missing-points {
     @apply
-    text-neutral-soft-white
+    text-neutral-light
     my-auto
   }
 </style>

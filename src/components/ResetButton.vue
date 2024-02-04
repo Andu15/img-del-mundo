@@ -1,6 +1,6 @@
 <template>
-  <button class="home-btn-container" @click="deleteData">
-    <Icon class="home-btn" icon="radix-icons:update" height="30" />
+  <button class="home-btn-container btn-large" @click="deleteData">
+    <Icon icon="radix-icons:update" height="30" />
   </button>
 </template>
 
@@ -24,17 +24,8 @@
   .home-btn-container {
     @apply
     my-auto
-    bg-primary-fluorescent-green
     rounded-full
     p-2
-    text-neutral-soft-white
     sm:p-3
   }
-
-  .home-btn-container:hover {
-    @apply
-    bg-neutral-soft-white
-    text-neutral-greenish-lead
-  }
-
 </style>
