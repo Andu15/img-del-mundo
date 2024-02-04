@@ -16,10 +16,7 @@
           <SellerScore :vendor="vendor" />
         </div>
         <div class="invoice-btn-container">
-          <router-link to="invoice" class="invoice-btn btn-large">
-            <Icon icon="fa-solid:file-invoice-dollar" height="30" />
-            <p>Reclamar Factura</p>
-          </router-link>
+          <InvoiceButton :isExistWinner="isExistWinner" />
           <StartButton />
           <ResetButton />
         </div>
@@ -32,6 +29,7 @@
   import { Icon } from "@iconify/vue";
 
   import SellerScore from "../components/SellerScore.vue";
+  import InvoiceButton from "../components/InvoiceButton.vue";
   import StartButton from "../components/StartButton.vue";
   import ResetButton from "../components/ResetButton.vue";
 
@@ -40,6 +38,7 @@
     components: {
       Icon,
       SellerScore,
+      InvoiceButton,
       StartButton,
       ResetButton
     },
@@ -47,24 +46,13 @@
       this.getWinners()
     },
     computed: {
-      // getWinners: function () {
-      //   const sellersInfo = this.$store.state.sellersInfo
-      //   const maximumScore = sellersInfo.find((vendedor) => vendedor.score >= 20)
-      //   console.log("maximumScore", maximumScore)
-      //   if(maximumScore !== undefined){
-      //     this.textResult = "Ya tenemos un ganador"
-      //     this.winningSeller = ""
-      //   } else {
-      //     this.textResult = "Aún no tenemos ganador"
-      //     this.winningSeller = "Sigamos jugando"
-      //   }
-      // }
     },
     data(){
       return {
         vendors: [],
         textResult: '',
-        winningSeller: ''
+        winningSeller: '',
+        isExistWinner: false
       }
     },
     watch: {
@@ -83,9 +71,11 @@
         if(maximumScore !== undefined){
           this.textResult = "Ya tenemos un ganador"
           this.winningSeller = ""
+          this.isExistWinner = true
         } else {
           this.textResult = "Aún no tenemos ganador"
           this.winningSeller = "Sigamos jugando"
+          this.isExistWinner = false
         }
       }
     },

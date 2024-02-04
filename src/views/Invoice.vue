@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <section class="statement-container">
-      <img src="../assets/imagenes_del_mundo_logo.png" alt="logo"/>
+      <img src="../assets/imagenes_del_mundo_logo.png"
+            alt="logo"
+            srcset="../assets/imagenes_del_mundo_logo-removebg.png"/>
       <div class="titles-invoice">
         <h2 class="title">Factura</h2>
         <p class="subtitle">Imagenes del Mundo</p>
@@ -9,7 +11,7 @@
     </section>
     <section class="date-container">
       <p class="title-date">Fecha:</p>
-      <p class="date">{{ new Date().toDateString() }}</p>
+      <p class="date">{{ currentDate }}</p>
     </section>
     <section class="summary-invoice">
       <div class="seller-info-container">
@@ -27,7 +29,18 @@
   </div>
 </template>
 
-<script></script>
+<script>
+  import { getCurrentDate } from "../services/dayjs"
+
+  export default {
+    name: 'Invoice',
+    computed: {
+      currentDate: function () {
+        return getCurrentDate()
+      }
+    }
+  }
+</script>
 
 <style scoped>
   .statement-container{
@@ -98,7 +111,7 @@
   }
   .text-content {
     @apply
-    text-neutral-light
+    /* text-neutral-light */
     bg-secondary-other
     text-left
     px-2
@@ -108,7 +121,7 @@
   }
   .text-content-2 {
     @apply
-    text-neutral-light
+    /* text-neutral-light */
     bg-secondary-other
     col-span-2
     text-left
