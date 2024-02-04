@@ -35,3 +35,8 @@ body {
   @apply
   bg-primary-main
 }
+.highlighted-property {
+  @apply
+  text-primary-secondary
+  font-semibold
+}

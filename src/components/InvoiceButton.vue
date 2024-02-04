@@ -18,12 +18,8 @@
     },
     methods: {
       generateInvoice(){
-        console.log("Se genero factura")
         this.$router.push('/invoice')
       }
-    },
-    updated() {
-      console.log("isExistWinner", this.isExistWinner)
     }
   }
 </script>

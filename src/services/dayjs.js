@@ -7,6 +7,6 @@ dayjs.locale('es') // use locale
 
 export const getCurrentDate = () => {
   const now = dayjs();
-  console.log("now", now)
-  return now.format("ddd DD MM YYYY");
+  const dateFormatted = now.format("dddd DD.MM.YYYY");
+  return dateFormatted.slice(0,1).toUpperCase() + dateFormatted.slice(1);
 }

@@ -78,9 +78,6 @@
           this.isExistWinner = false
         }
       }
-    },
-    updated(){
-      // console.log("vendors", this.vendors)
     }
   }
 </script>
