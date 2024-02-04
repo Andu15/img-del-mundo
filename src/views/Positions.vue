@@ -10,7 +10,7 @@
       <section class="info-summary-container" v-if="vendors.length > 0">
         <div class="ref-tag">
           <p>Vendedor</p>
-          <p>Tiene / Falta</p>
+          <p>Likes</p>
         </div>
         <div v-for="(vendor, index) in vendors" :key="index">
           <SellerScore :vendor="vendor" />

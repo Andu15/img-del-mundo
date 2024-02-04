@@ -15,6 +15,8 @@
     methods: {
       deleteData(){
         console.log("eliminando console")
+        localStorage.clear()
+        this.$router.push('/')
       }
     }
   }

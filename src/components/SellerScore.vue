@@ -3,7 +3,7 @@
     <span class="seller-name" v-if="infoVendor && infoVendor.name">{{ infoVendor.name }}</span>
     <div class="score-info-container">
       <strongs class="current-points">{{ vendor.score }}</strongs>
-      <Icon icon="mdi:heart-circle" height="30" />
+      <Icon icon="icon-park-twotone:like" height="30" />
       <p class="slash">/</p>
       <span class="missing-points">20</span>
     </div>
