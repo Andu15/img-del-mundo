@@ -2,7 +2,7 @@
   <div class="scores-container">
     <span class="seller-name" v-if="infoVendor && infoVendor.name">{{ infoVendor.name }}</span>
     <div class="score-info-container">
-      <strongs class="current-points">{{ vendor.score }}</strongs>
+      <strong class="current-points">{{ vendor.score }}</strong>
       <Icon icon="icon-park-twotone:like" height="30" />
       <p class="slash">/</p>
       <span class="missing-points">20</span>
@@ -29,9 +29,7 @@ export default {
   methods: {
     async loadInfoVendor() {  
       if (this.vendor && this.vendor.sellerId) {
-        console.log("id real", this.vendor.sellerId)
         this.infoVendor = await this.$store.dispatch("getAlegraSellerByID", this.vendor.sellerId)
-        console.log("infoVEndor", this.infoVendor)
       }
     }
   },
