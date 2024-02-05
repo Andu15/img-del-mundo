@@ -41,34 +41,47 @@ export const getSellerById = async (ID) => {
   }
 }
 
-export const updatePoints = async (idSeller, points) => {
-  const url = `${baseUrl}/sellers/${idSeller}`;
+// export const updatePoints = async (idSeller, points) => {
+//   const url = `${baseUrl}/sellers/${idSeller}`;
+//   const response = await fetch(url, {
+//     ...options,
+//     method: "PUT", 
+//     body: JSON.stringify({
+//       observations: points
+//     })
+//   });
+//   const json = await response.json();
+//   console.log(json);
+// }
+
+export const createBillingNumber = async () => {
+  const url = `${baseUrl}/number-templates `;
   const response = await fetch(url, {
-    ...options,
-    method: "PUT", 
+    method: "POST", 
+    headers,
     body: JSON.stringify({
-      observations: points
+      autoincrement: true
     })
-  });
+  })
   const json = await response.json();
   console.log(json);
 }
 
-export const generateInvoice = async (currentDate, expirationDate, idClient, idProduct, salePrice, description, amount) => {
-  const url = `${baseUrl}/invoices`;
+export const generateInvoice = async (invoiceNumber, arrayItems, termsConditions, dueDate, date, sellerId) => {
+  const url = `${baseUrl}/providerId `;
   const response = await fetch(url, {
-    ...options,
     method: "POST", 
+    headers,
     body: JSON.stringify({
-      date: currentDate,
-      dueDate: expirationDate,
-      client: idClient,
-      items: [{
-        id: idProduct,
-        price: salePrice,
-        description: description,
-        quantity: amount
-      }]
+      numberTemplate: {
+        id: invoiceNumber
+      },
+      status: 'open',
+      items: arrayItems,
+      termsConditions,
+      dueDate,
+      date,
+      seller: sellerId
     })
   });
   const json = await response.json();

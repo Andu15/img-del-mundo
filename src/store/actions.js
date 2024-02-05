@@ -1,6 +1,10 @@
 import { imageSearch } from "../services/pexels";
 import { fetchSellers } from "../services/jsonPlaceholder";
-import { getSellers, getSellerById } from "../services/alegra";
+import { 
+  getSellers, 
+  getSellerById, 
+  createBillingNumber 
+} from "../services/alegra";
 
 export const getImages = async ({ commit }, {searchWord, quantity}) => {
   const result = await imageSearch(searchWord, quantity);
@@ -23,7 +27,11 @@ export const getAlegraSellerByID = async ({commit}, id) => {
   return response;
 }
 
-
 // export const updateInfo = ({commit}, seller) => {
 //   commit("fillInfo", seller);
 // }
+
+export const createInvoiceNumber = async ({commit}) => {
+  const response = await createBillingNumber();
+  return response;
+}

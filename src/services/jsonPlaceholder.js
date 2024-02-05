@@ -5,9 +5,8 @@ export const fetchSellers = async () => {
   try {
     const response = await fetch(url);
     const json = await response.json();
-    // console.log(8, json)
     return json;
   } catch (error) {
-    console.log(error.message)
+    throw new Error(error.message)
   }
 }

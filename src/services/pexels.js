@@ -18,7 +18,6 @@ export const imageSearch = async (queryWord, amount) => {
     const json = await response.json();
     return json.photos;
   } catch (error) {
-    // console.log(error.message)
-    throw Error(error.message) 
+    throw new Error(error.message) 
   }
 };

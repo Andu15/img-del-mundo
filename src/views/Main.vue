@@ -61,12 +61,6 @@
       ImageContainer,
       Loading
     },
-    mounted() {
-      // this.$store.dispatch('')
-    },
-    updated() {
-      // console.log("actualizado")
-    },
     computed:  {
       images: function () {
         return this.$store.state.images

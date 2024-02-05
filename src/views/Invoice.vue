@@ -125,6 +125,9 @@
         this.winnerSellerInfo.totalScore = 0
         this.winnerSellerInfo.winningImages = []
       }
+    },
+    async mounted(){
+      // const invoiceNumber = await this.$store.dispatch("createInvoiceNumber")
     }
   }
 </script>
