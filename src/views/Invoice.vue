@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="invoice-section-container">
+    <main class="invoice-section-container" ref="pdfContent">
       <section class="statement-container">
         <img src="../assets/imagenes_del_mundo_logo.png"
               alt="logo"
@@ -68,17 +68,19 @@
       </section>
     </main>
     <aside class="btn-section">
-      <button class="btn-large download-btn">
+      <!-- <button class="btn-large download-btn" @click="exportToPDF">
         <Icon icon="ic:twotone-download" />
           Descargar en PDF
-      </button>
+      </button> -->
     </aside>
+    <div :class="{ loadingContainer: fullscreenLoading }"></div>
   </div>
 </template>
 <script>
   import { Icon } from '@iconify/vue';
 
   import { getCurrentDate } from "../services/dayjs"
+  import { customExportToPDF } from "../services/html2pdf"
 
   export default {
     name: 'Invoice',
@@ -95,7 +97,8 @@
           status: '',
           totalScore: 0,
           winningImages: []
-        }
+        },
+        fullscreenLoading: false
       }
     },
     computed: {
@@ -128,6 +131,18 @@
     },
     async mounted(){
       // const invoiceNumber = await this.$store.dispatch("createInvoiceNumber")
+    },
+    methods: {
+      async exportToPDF(){
+        try {
+          this.fullscreenLoading = true;
+          await customExportToPDF(this.$refs.pdfContent, "Factura", "")
+        } catch (error) {
+          throw new Error(error.message)
+        } finally {
+          this.fullscreenLoading = false;
+        }
+      }
     }
   }
 </script>
@@ -242,5 +257,21 @@
     text-lg
     sm:p-3
   }
-
+.loadingContainer {
+    position: relative;
+}
+.loadingContainer::before {
+    cursor: progress;
+    opacity: 0.8; 
+    pointer-events: none; /* Desactiva los eventos de usuario */
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black; /* Ajusta la opacidad según tu preferencia */
+    z-index: 9999;
+    transition: 1s all;
+}
 </style>
